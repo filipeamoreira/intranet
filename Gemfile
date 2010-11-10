@@ -1,11 +1,33 @@
-source 'http://rubygems.org'
+source :rubygems
 
 gem 'rails', '3.0.1'
+gem 'connection_ninja'
+gem 'will_paginate', '~> 3.0.pre2'
+
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3-ruby', :require => 'sqlite3'
+#gem 'sqlite3-ruby', :require => 'sqlite3'
+
+
+
+platforms :jruby do
+  gem 'activerecord-jdbcmssql-adapter'
+  gem 'jdbc-sqlite3'
+  #  gem 'activerecord-jdbc-adapter'
+  #  gem 'ruby-odbc'
+end
+
+
+platforms :ruby do
+  gem 'sqlite3-ruby', :require => 'sqlite3'
+end
+
+group :development do
+  gem 'awesome_print'
+  gem 'annotate-models'
+end
 
 # Use unicorn as the web server
 # gem 'unicorn'
