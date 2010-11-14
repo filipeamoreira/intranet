@@ -6,9 +6,10 @@ class OrdersController < ApplicationController
     @orders = Order.find_by_sql("SELECT * FROM SL_PL_NL_DETAIL WHERE DET_ACCOUNT = '#{customer_code}'
                                  AND DET_QUANTITY != 0
                                  OR DET_QUANTITY IS NULL")
-    
+
   end
-  
+
+
   def create
   end
 
@@ -23,5 +24,5 @@ class OrdersController < ApplicationController
 
   def destroy
   end
-  
+
 end
