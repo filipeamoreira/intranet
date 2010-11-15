@@ -3,6 +3,9 @@ source :rubygems
 gem 'rails', '3.0.1'
 gem 'connection_ninja'
 gem 'will_paginate', '~> 3.0.pre2'
+gem 'haml'
+gem 'dalli'
+#gem 'kgio'
 
 
 # Bundle edge Rails instead:
