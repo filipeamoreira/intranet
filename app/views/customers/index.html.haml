@@ -1,0 +1,12 @@
+%h1 Customers List
+
+%table
+  %tr.header
+    %th Customer ID
+    %th Postcode
+
+    @customers.each do |customer|
+      %tr
+        %td= customer.id
+        %td= customer.postcode
+

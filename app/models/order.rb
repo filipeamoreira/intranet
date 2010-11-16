@@ -149,6 +149,10 @@ class Order < ActiveRecord::Base
           {:date => date, :customer_code => "A001"}).sum(:DET_GROSS)
   end
 
+  def top_ten_week
+    @top_ten_week_products = Order.find_by_sql("SELECT TOP 10 DET_STOCK_CODE, SUM(DET_GROSS) FROM SL_PL_NL_DETAIL WHERE DET_STOCK_CODE IS NOT NULL AND DET_STOCK_CODE <> '' GROUP BY DET_STOCK_CODE ORDER BY SUM(DET_GROSS) DESC")
+  end
+
 end
 
 

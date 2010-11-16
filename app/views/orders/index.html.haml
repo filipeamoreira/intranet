@@ -53,7 +53,9 @@
       %td= order.quantity.to_i
       %td= number_to_currency(order.unit_price, :unit => "£")
       %td= order.stock_code
-      %td= order.purchased_at
+      %td=
+
+ order.purchased_at
       %td= number_to_currency(order.net, :unit => "£")
       %td.total= number_to_currency(order.gross, :unit => "£")
 

@@ -10,7 +10,8 @@ class OrdersController < ApplicationController
     #                            :start_date => 48.months.ago.to_date,
     #                            :end_date => 46.months.ago.to_date}])
 #    Rails.cache.fetch("orders", :expires_in => 2.minutes) do
-    @orders = Order.where("DET_ACCOUNT = 'A001'")
+    #    @orders = Order.where("DET_ACCOUNT = 'A001'")
+    @orders = Order.all
 #    end
 
 #    @orders = Order.where("DET_ACCOUNT = 'A001'")
