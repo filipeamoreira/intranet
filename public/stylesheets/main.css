@@ -1,0 +1,46 @@
+body{
+  font-size: 62.5%;
+  font-family: "Verdana", "Sans serif"
+  color: #1E1E1E;
+  line-height: 2em;
+}
+p{
+  font-size: 1.2em;
+}
+a{
+  font-size: 1.2em;
+}
+h1, h2, h3, h4, h5, h6, h7, h8{
+  font-weight: bold;
+}
+h1{
+  font-size: 3em;
+  margin-bottom: 2em;
+}
+tr{
+  border: 1px solid #CCCCCC;
+  border-collapse: collapse;
+}
+tr.header:hover{
+  background: inherit;
+}
+tr:hover{
+  background: #FFFBCF;
+}
+th{
+  font-size: 1.4em;
+  padding: 1em;
+}
+td{
+  font-size: 1.2em;
+  padding: 1em;
+}
+pre{
+  font-size: 1.2em;
+}
+#orders_chart{
+
+}
+.total{
+  font-size: 1.6em;
+}

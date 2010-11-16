@@ -1,0 +1,61 @@
+%h1 Listing Order
+
+:javascript
+  $(function() {
+    new Highcharts.Chart({
+      chart: {
+          renderTo: "orders_chart"
+      },
+      title: {
+        text: "Orders by Day"
+      },
+      xAxis: {
+        type: "datetime"
+      },
+      yAxis: {
+        title: {
+          text: "Pounds"
+        }
+      },
+      tooltip: {
+        formatter: function() {
+          return Highcharts.dateFormat("%B %e, %Y", this.x) + ': ' + "£" + Highcharts.numberFormat(this.y, 2);
+        }
+      },
+      series: [{
+        name: '#{@name}',
+        pointInterval: #{@pointInterval},
+        pointStart: #{@pointStart},
+        data: #{@data}
+      }]
+      });
+    $("tspan:contains(Highcharts.com)").hide();
+  });
+
+
+#orders_chart
+
+%table
+  %tr.header
+    %th Account
+    %th Desciption
+    %th Quantity
+    %th Unit Price
+    %th Stock Code
+    %th Date
+    %th Total (Net)
+    %th.total Total (gross)
+    
+  - cache(@orders).each do |order|
+    %tr
+      %td= order.account
+      %td= order.description
+      %td= order.quantity.to_i
+      %td= number_to_currency(order.unit_price, :unit => "£")
+      %td= order.stock_code
+      %td=
+
+ order.purchased_at
+      %td= number_to_currency(order.net, :unit => "£")
+      %td.total= number_to_currency(order.gross, :unit => "£")
+

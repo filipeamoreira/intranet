@@ -116,6 +116,7 @@ class Order < ActiveRecord::Base
 
   alias_attribute "account", "DET_ACCOUNT"
   alias_attribute "gross", "DET_GROSS"
+  alias_attribute "net", "DET_NETT"
   alias_attribute "origin", "DET_ORIGIN"
   alias_attribute "ledger", "DET_LEDGER"
   alias_attribute "type", "DET_TYPE"
@@ -126,7 +127,7 @@ class Order < ActiveRecord::Base
   alias_attribute "stock_code", "DET_STOCK_CODE"
   alias_attribute "type", "DET_TYPE"
   alias_attribute "ref", "DET_HEADER_REF"
-  alias_attribute "cost", "DET_COSTPRICE"
+  alias_attribute "cost_price", "DET_COSTPRICE"
   alias_attribute "quantity", "DET_QUANTITY"
   alias_attribute "primary", "DET_PRIMARY"
   alias_attribute "sort_key2", "DEL_STKSORTKEY2"
@@ -136,7 +137,22 @@ class Order < ActiveRecord::Base
   alias_attribute "unit_quantity", "DET_UNIT_QTY"
   alias_attribute "price_code", "DET_PRICE_CODE"
 
+  scope :A001, where(:customer_code => "A001")
   @@per_page = 10
+
+  def self.total_on(date)
+    #    where("date(purchased_at) = ?", date).sum(:gross)
+#    where("DET_ACCOUNT = 'A001' AND DET_DATE BETWEEN ? AND ?",
+    #          date, Date.today).sum("DET_GROSS").to_f
+    
+    where("(DET_DATE) = :date AND DET_ACCOUNT = :customer_code",
+          {:date => date, :customer_code => "A001"}).sum(:DET_GROSS)
+  end
+
+  def top_ten_week
+    @top_ten_week_products = Order.find_by_sql("SELECT TOP 10 DET_STOCK_CODE, SUM(DET_GROSS) FROM SL_PL_NL_DETAIL WHERE DET_STOCK_CODE IS NOT NULL AND DET_STOCK_CODE <> '' GROUP BY DET_STOCK_CODE ORDER BY SUM(DET_GROSS) DESC")
+  end
+
 end
 
 
